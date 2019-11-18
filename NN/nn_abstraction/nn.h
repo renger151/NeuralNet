@@ -5,23 +5,33 @@
 
 
 using namespace std;
-
+//This  structure discribes a connection between 2 neurons
 struct Connection {
-	Connection(int _id, float _weight) {
-		this->id = _id;
-		this->weight = _weight;
+	Connection(int _ConnectionID, float _Weight, int _Neuron1ID, int _Neuron2ID) {
+		this->ConnectionID = _ConnectionID;
+		this->Weight = _Weight;
+		this->Neuron1ID = _Neuron1ID;
+		this->Neuron2ID = _Neuron2ID;
 	}
-	int id = 0;
-	float weight = 0;
+	int ConnectionID = 0;
+	int Neuron1ID;
+	int Neuron2ID;
+	float Weight = 0;
 };
 
 struct Neuron {
-	Neuron(int _id, float _value) {
-		this->value = _value;
+	Neuron(int _NeuronID, float _Value) {
+		this->NeuronID = _NeuronID;
+		this->Value = _Value;
 		printf("Neuron Created!");
 	}
-	int id = 0;
-	float value = 0;
+	void FillConnection(int connection_number) {
+		for (int i = 0; i < connection_number; i++) {
+			this->Connections[i] = Connection(i, 1/rand(), this->NeuronID, i);
+		}
+	}
+	int NeuronID = 0;
+	float Value = 0;
 	vector<Connection> Connections;
 };
 
