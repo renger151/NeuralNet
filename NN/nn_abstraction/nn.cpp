@@ -22,6 +22,8 @@ void BackPropagation(vector<vector<Neuron>>& NeuralNetwork, vector<float> Output
 	for (int i = 0; i < sizeof(OutputLayerExpectingValues); i++) {
 		DeltaLayer[i] = Neuron(i, (NeuralNetwork.back()[i].Value - OutputLayerExpectingValues[i])* (NeuralNetwork.back()[i].Value - OutputLayerExpectingValues[i]));
 	}
+	//Calculating weights that have the most influence on each output values
+
 	//Correcting weights
 }
 
