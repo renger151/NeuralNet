@@ -20,9 +20,13 @@ struct Connection {
 };
 
 struct Neuron {
-	Neuron(int _NeuronID, float _Value) {
+	int NeuronID = 0;
+	float Activation = 0;
+	float bias = 0;
+	Neuron(int _NeuronID, float _Activation, float _bias) {
 		this->NeuronID = _NeuronID;
-		this->Value = _Value;
+		this->Activation = _Activation;
+		this->bias = _bias;
 		printf("Neuron Created!");
 	}
 	void FillConnection(int connection_number) {
@@ -30,12 +34,9 @@ struct Neuron {
 			this->Connections[i] = Connection(i, 1/rand(), this->NeuronID, i);
 		}
 	}
-	int NeuronID = 0;
-	float Value = 0;
 	vector<Connection> Connections;
 };
 
 extern void FeedForward(vector<vector<Neuron>>& NeuralNetwork);
 extern void BackPropagation(vector<vector<Neuron>>& NeuralNetwork, vector<float> OutputLayerExpectingValues);
-extern float NeuronWeightedSum(vector<Neuron>& layer, int connection_number);
 extern float Sigmoid(float weighted_sum);

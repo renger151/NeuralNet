@@ -1,43 +1,47 @@
 #include "nn.h"
 
-
 void FeedForward(vector<vector<Neuron>>& NeuralNetwork);
 void BackPropagation(vector<vector<Neuron>>& NeuralNetwork, vector<Neuron> OutputLayer);
-float NeuronWeightedSum(vector<Neuron>& layer, int connection_number);
 float Sigmoid(float weighted_sum);
 
 vector<vector<Neuron>> NeuralNetwork;
 
 void FeedForward(vector<vector<Neuron>>& NeuralNetwork) {
+	float weighted_sum = 0;
+	//Selecting layer
 	for (int i = 0; i < NeuralNetwork.size(); i++) {
-		for (int j = 0; j < NeuralNetwork[i].size(); j++) {
-			NeuralNetwork[i + 1][j].Value = Sigmoid(NeuronWeightedSum(NeuralNetwork[i], NeuralNetwork[i][j].Connections[i].Weight));
+	//Selecting neuron in the next layer to pass there the squashed weighted sum
+		for (int j = 0; j < NeuralNetwork[i + 1].size(); j++) {
+			//Calculating weighted sum for the chosen layer
+			for (int z = 0; z < NeuralNetwork[i].size(); z++) {
+				weighted_sum += NeuralNetwork[i][z].Activation * NeuralNetwork[i][z].Connections[z].Weight;
+			}
+			//Adding bias to this weighted sum
+			weighted_sum += NeuralNetwork[i + 1][j].bias;
+			//Passing all of this througth the sigmoid function and applying to the target neuron
+			NeuralNetwork[i + 1][j].Activation = Sigmoid(weighted_sum);
 		}
 	}
 }
 
 void BackPropagation(vector<vector<Neuron>>& NeuralNetwork, vector<float> OutputLayerExpectingValues) {
 	//Calculating a cost function
-	vector<Neuron> DeltaLayer; //Actually a cost function for every output neuron
+	float CostFunction = 0;
 	for (int i = 0; i < sizeof(OutputLayerExpectingValues); i++) {
-		DeltaLayer[i] = Neuron(i, (NeuralNetwork.back()[i].Value - OutputLayerExpectingValues[i])* (NeuralNetwork.back()[i].Value - OutputLayerExpectingValues[i]));
+		CostFunction += pow(NeuralNetwork.back()[i].Activation - OutputLayerExpectingValues[i], 2);
 	}
-	//Calculating weights that have the most influence on each output values
+	//Calculating weights and biases
+	for (int i = 0; i < NeuralNetwork.back().size(); i++) {
+		for (int i = 0; i < NeuralNetwork.back()[i].Connections.size(); i++) {
 
+		}
+		for (int i = 0; i < NeuralNetwork.back().size(); i++) {
+
+		}
+	}
 	//Correcting weights
 }
 
-float NeuronWeightedSum(vector<Neuron>& layer, int connection_number) {
-	float weighted_sum = 0;
-	for (int i = 0; i < layer.size(); i++) {
-		weighted_sum += layer[i].Value * layer[i].Connections[connection_number].Weight;
-	}
-	return weighted_sum;
-}
-
 float Sigmoid(float x) {
-	float exp_val, return_val;
-	exp_val = exp((double)-x);
-	return_val = 1 / (1 + exp_val);
-	return return_val;
+	return 1 / (1 + exp((double)-x));
 }
