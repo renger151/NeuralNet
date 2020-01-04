@@ -99,7 +99,7 @@ void GradientDescent(vector<Layer>& NeuralNet) {
     for (i = NetworkSize - 1; i > 0; i--) {
         for (j = 0; j < NeuralNet[i].Neurons.size(); j++) {
             for (y = 0; y < NeuralNet[i].Neurons[j].PreviousLayerConnections.size(); y++) {
-                NeuralNet[i].Neurons[j].PreviousLayerConnections[y].DeltaWeight = LearningRate * NeuralNet.back().Neurons[j].Error * (NeuralNet[i].Neurons[j].Activation + (1 - NeuralNet[i].Neurons[j].Activation)) * NeuralNet[i - 1].Neurons[y].Activation;
+                NeuralNet[i].Neurons[j].PreviousLayerConnections[y].DeltaWeight = LearningRate * NeuralNet[i].Neurons[j].Error * (NeuralNet[i].Neurons[j].Activation + (1 - NeuralNet[i].Neurons[j].Activation)) * NeuralNet[i - 1].Neurons[y].Activation;
                 NeuralNet[i].Neurons[j].PreviousLayerConnections[y].Weight += NeuralNet[i].Neurons[j].PreviousLayerConnections[y].DeltaWeight;
             }
         }
