@@ -1,2 +1,5 @@
 ﻿  main.cpp
-  NN.vcxproj -> D:\development\NN\Debug\NN.exe
+D:\development\NeuralNet\NN\mnist.h(136,17): warning C4018: '<': signed/unsigned mismatch
+  NN.cpp
+  Generating Code...
+  NN.vcxproj -> D:\development\NeuralNet\Debug\NN.exe

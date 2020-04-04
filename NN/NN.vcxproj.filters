@@ -21,15 +21,12 @@
     <ClCompile Include="NN_ABSTRACTIONS\NN.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileShit\File.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NN_ABSTRACTIONS\NN.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileShit\File.h">
+    <ClInclude Include="mnist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

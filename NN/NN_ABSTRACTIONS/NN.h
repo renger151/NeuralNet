@@ -4,7 +4,7 @@
 #include <math.h>
 #include <vector>
 
-#define LearningRate 0.1
+#define LearningRate 0.1f
 
 using namespace std;
 
@@ -17,13 +17,13 @@ struct Connection {
 };
 
 struct Neuron {
-    Neuron(int _BIAS) {
+    Neuron(float _BIAS) {
         this->BIAS = _BIAS;
         printf("Neuron Created!");
     }
     float Activation = 0;
     float Error = 0;
-    int BIAS = 0;
+    float BIAS = 0;
     vector<Connection> PreviousLayerConnections;
 };
 
@@ -32,7 +32,7 @@ struct Layer {
         this->LayerSize = _LayerSize;
         //Filling the layer with neurons
         for (unsigned i = 0; i < this->LayerSize; i++) {
-            this->Neurons.back() = Neuron(rand());
+            this->Neurons.back() = Neuron(float(rand()));
         }
         printf("Layer Created!");
     }
@@ -43,8 +43,8 @@ struct Layer {
 void FillNeuralNetworkWithConnections(vector<Layer>& NeuralNet);
 float LayerWeightedSum(Layer layer, Neuron Neuron);
 float Sigmoid(float x);
-void ForwardPropagation(vector<Layer>& NeuralNet);
-void BackPropagation(vector<Layer>& NeuralNet, vector<float> ExcpectedValues);
+void ForwardPropagation(vector<Layer>& NeuralNet, unsigned char *InputVals);
+void BackPropagation(vector<Layer>& NeuralNet, vector<float> &ExcpectedValues);
 void GradientDescent(vector<Layer>& NeuralNet);
-float GetResults(vector<Neuron> OutputLayer);
+float GetResults(Layer OutputLayer);
 
